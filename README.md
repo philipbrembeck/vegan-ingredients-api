@@ -8,13 +8,14 @@ The VeganCheck.me Ingredients API is a fork of [is-vegan](https://github.com/hmo
 
 ## How to use
 ### JSON End-Point
-The APIs base path is `https://ingredients.vegancheck.me` and gives out a JSON response. (Thanks to IONOS Deploy Now!) 
+The APIs base path is `https://ingredients.vegancheck.me/ingredients` and gives out a JSON response. (Thanks to IONOS Deploy Now!) 
 
 ### Parameters
 The following parameters are available as of now:
-| parameter | usage                               | method              |
-|-----------|-------------------------------------|---------------------|
-|text       | transmit the ingredients list       | GET (as text)       |
+| parameter | usage                                            | method                |
+|-----------|--------------------------------------------------|-----------------------|
+|text       | transmit the ingredients list                    | GET (as text)         |
+|ingredients| transmit the ingredients list (url-encoded)      | GET (as URL parameter)|
 
 Sample request:
   ````bash
@@ -22,6 +23,11 @@ Sample request:
   'https://ingredients.vegancheck.me/ingredients' \
   --header 'Content-Type: text/plain' \
   -d 'glucose syrup (from wheat or corn), sugar, gelatin, dextrose (from wheat or corn), contains less than 2% of: citric acid, atrificial flavors, natural flavors, palm oil, palm kernel oil, carnabua wax, beeswax, yellow 5, red 40, blue 1.'
+  ````
+  or 
+  ````bash
+  curl -X GET \
+  'https://ingredients.vegancheck.me/ingredients?ingredients=glucose%20syrup%20(from%20wheat%20or%20corn)%2C%20sugar%2C%20gelatin%2C%20dextrose%20(from%20wheat%20or%20corn)%2C%20contains%20less%20than%202%25%20of%3A%20citric%20acid%2C%20atrificial%20flavors%2C%20natural%20flavors%2C%20palm%20oil%2C%20palm%20kernel%20oil%2C%20carnabua%20wax%2C%20beeswax%2C%20yellow%205%2C%20red%2040%2C%20blue%201' \
   ````
 The header `"text/plain"` as well as the plain-text input has to be sent with every request, otherwise an error will be thrown.
 
