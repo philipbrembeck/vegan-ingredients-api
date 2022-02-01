@@ -1,156 +1,116 @@
-[![Build Status](https://travis-ci.org/hmontazeri/is-vegan.svg?branch=master)](https://travis-ci.org/hmontazeri/is-vegan) [![npm version](https://badge.fury.io/js/is-vegan.svg)](https://badge.fury.io/js/is-vegan) [![codecov](https://codecov.io/gh/hmontazeri/is-vegan/branch/master/graph/badge.svg)](https://codecov.io/gh/hmontazeri/is-vegan)
+<img width="80px" src="https://raw.githubusercontent.com/JokeNetwork/vegancheck.me/main/img/hero_icon.png" align="right" alt="VeganCheck Logo">
 
-# is-vegan
+# VeganCheck.me Ingredients API
 
-Is-Vegan helps you to find out which food ingredients are vegan / non-vegan. It can answer that on 1 ingredient or on a list of ingredients. It uses a 850+ entries list of non-vegan ingredients.
+## Introduction
+The VeganCheck.me Ingredients API is a fork of [is-vegan](https://github.com/hmontazeri/is-vegan) with some more languages for recognition added.
 
-[Wanna buy me a Coffee?](https://ko-fi.com/hmontazeri)
+## How to use
+### JSON End-Point
+The APIs base path is `https://vegancheck.me/api/v0/ingredients` and gives out a JSON response. 
 
-[How to use?](#usage)
+### Authenticate
+For this endpoint, no authentication is needed.
+Please note that there is a general rate limit of 1,000 requests/day/IP. 
 
-[Free API Service?](https://is-vegan.netlify.com/)
+### Parameters
+The following parameters are available as of now:
+| parameter | usage                               | method              |
+|-----------|-------------------------------------|---------------------|
+|text       | transmit the ingredients list       | GET (as text)       |
 
-## Why?
+Sample request:
+  ````bash
+  curl -X GET \
+  'https://vegancheck.me/api/v0/ingredients' \
+  --header 'Content-Type: text/plain' \
+  -d 'glucose syrup (from wheat or corn), sugar, gelatin, dextrose (from wheat or corn), contains less than 2% of: citric acid, atrificial flavors, natural flavors, palm oil, palm kernel oil, carnabua wax, beeswax, yellow 5, red 40, blue 1.'
+  ````
+The header `"text/plain"` as well as the plain-text input has to be sent with every request, otherwise an error will be thrown.
 
-We are aware that 'veganism' and the definition of it can be a hot topic. We created the non-vegan list keeping in mind that veganism in dietary terms, it denotes the practice of dispensing with all products derived wholly or partly from animals.
+**Attention**: The ingredients have to be comma seperated!
 
-Our first step is the approach to help people understand, which products, and where applicable its ingredients, do not involve, or have involved, the use of any animal product, by-product or derivative. It is not driven about any vegan lifestyle choice or stereotype.
-We welcome and appreciate any help and concerence regarding the nonvegan/canbevegan list.
+### Responses
+We use standardized HTTP status codes as responses. 
+Depending on which language you want to use to implement the API in, you may have to disable error-handling or ignore errors.
 
-Currently we are unfortunatly not adressing any other forms of exploitation of, and cruelty to, animals for clothing, cosmetics or any other purpose.
+#### Positive Response
+A successful request will throw a result like this:
+````json
+{
+  "code": "OK",
+  "status": "200",
+  "message": "Success",
+  "data": {
+    "vegan": "false",
+    "flagged": [
+      "beeswax",
+      "gelatin"
+    ]
+  }
+}
+````
+Please note:
+* The field `data→flagged` will only be present if `vegan` is `false`
 
-**Thank you all for your comments, we appreciate the discussion, as we grow and learn from your input.**
+#### Error responses
+The following error responses can be expected:
 
-[All comments on Hacker News](https://news.ycombinator.com/item?id=16316140)
+* `400` - Missing required parameter, please make sure you sent at least one of the parameters mentioned in [Parameters](#Parameters):
+  ````json
+  {
+    "code": "bad_request",
+    "status": "400",
+    "message": "Missing parameter: text-input"
+  }
+  ````
+* `429` - Your rate limit has exceeded. Please try again later/try another `AUTH-KEY`:
+  ````json
+  {
+    "code": "ratelimit_exceeded",
+    "status": "429",
+    "message": "Try again after 24 hours"
+  }
+  ````
 
-## Sources
+## Code examples
+### PHP
+````php
+$ch = curl_init();
 
-We want to make sure that you understand how is-vegan is implemented. We analyzed as many good information websites for vegan / non-vegan ingredients as we found to get a very accurate list of ingredients. **However, feel free to send a pull request with an updated version of the list.**
+curl_setopt($ch, CURLOPT_URL, 'https://vegancheck.me/api/v0/ingredients');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
 
-Websites we parsed:
+curl_setopt($ch, CURLOPT_POSTFIELDS, "glucose syrup (from wheat or corn), sugar, gelatin, dextrose (from wheat or corn), contains less than 2% of: citric acid, atrificial flavors, natural flavors, palm oil, palm kernel oil, carnabua wax, beeswax, yellow 5, red 40, blue 1.");
 
-- [veganpeace](http://www.veganpeace.com/ingredients/ingredients.htm)
-- [peta](https://www.peta.org/living/food/animal-ingredients-list/)
-- [veganwolf](http://www.veganwolf.com/animal_ingredients.htm)
+$headers = array();
+$headers[] = 'Content-Type: text/plain';
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-**and we added also a few ourselves...**
+$result = curl_exec($ch);
+curl_close($ch);
 
-## Usage
+$data = json_decode($result);
+$vegan = $data->data->vegan;
 
-### Add
+echo 'Are Haribo Gummibears vegan? '.$vegan;
+````
 
-```bash
-yarn add is-vegan
-```
+### Python
+````py
+import requests
 
-or
+reqUrl = "https://vegancheck.me/api/v0/ingredients"
 
-```bash
-npm install is-vegan --save
-```
+headersList = {
+ "Content-Type": "text/plain" 
+}
 
-### example
+payload = "glucose syrup (from wheat or corn), sugar, gelatin, dextrose (from wheat or corn), contains less than 2% of: citric acid, atrificial flavors, natural flavors, palm oil, palm kernel oil, carnabua wax, beeswax, yellow 5, red 40, blue 1."
 
-```javascript
-const isVegan = require('is-vegan');
+response = requests.request("GET", reqUrl, data=payload,  headers=headersList)
+vegan = response.json()['data']['vegan']
 
-// or
-
-import * as isVegan from 'is-vegan';
-
-// example for single ingredient
-isVegan.isVeganIngredient('soy'); // true
-isVegan.isVeganIngredient('milk'); // false
-
-// example for list of ingredients
-isVegan.isVeganIngredientList(['aspic', 'albumin']); // false
-isVegan.isVeganIngredientList(['soy', 'cacao butter']); // true
-
-// example for list of ingredients
-isVegan.containsNonVeganIngredients(['aspic', 'albumin', 'soy']); // ['aspic', 'albumin']
-isVegan.containsNonVeganIngredients(['soy', 'cacao butter']); // []
-
-// example for list of ingredients wich contain flagged and non-vegan ingredients
-isVegan.checkIngredients(['soy', 'cacao butter', 'pork', 'beef', 'glycine']);
-// returns
-// {
-//   nonvegan: ['pork', 'beef'],
-//   flagged: ['glycine']
-// }
-
-// example for list of ingredients in Italian language
-isVegan.setIngredientsLanguage('it'); // 'it' is the two-letter ISO 639-1 code for the Italian language
-isVegan.checkIngredients([
-  'manzo',
-  'maiale',
-  'glicina',
-  'biotina',
-  'soia',
-  'aglio',
-]);
-// returns
-// {
-//   nonvegan: ['manzo', 'maiale'],
-//   flagged: ['glicina', 'biotina']
-// }
-
-// or
-
-import { checkIngredients } from 'is-vegan';
-
-// example for list of ingredients wich contain flagged and non-vegan ingredients
-checkIngredients(['soy', 'cacao butter', 'pork', 'beef', 'glycine']);
-
-// returns
-// {
-//   nonvegan: ['pork', 'beef'],
-//   flagged: ['glycine']
-// }
-```
-
-### real world example
-
-[Products searched on USDA Food Composition Databases](https://ndb.nal.usda.gov/ndb/search/list)
-
-```javascript
-const isVegan = require('is-vegan');
-
-// MOSER ROTH, DARK CHOCOLATE
-isVegan.isVeganIngredientList([
-  'COCOA LIQUOR',
-  'SUGAR',
-  'COCOA BUTTER',
-  'ALKALIZED REDUCED FAT COCOA POWDER',
-  'SOY LECITHIN EMULSIFIER',
-  'GROUND VANILLA',
-]); // returns true
-```
-
-Checkout: [RunKit "is-vegan-playground" for more examples](https://runkit.com/hmontazeri/is-vegan-playground)
-
-## Free API
-
-[https://is-vegan.netlify.com/](https://is-vegan.netlify.com/)
-
-## Test
-
-```bash
-yarn test
-```
-
-## Thanks for translating the lists to italian
-
-[gianantoniopini](https://github.com/gianantoniopini)
-
-## Alfred Workflow by Kyle Brumm (kjbrum)
-
-[alfred-is-vegan](https://github.com/kjbrum/alfred-is-vegan)
-
-## TODO
-
-- extend list
-
-## Authors
-
-- Hamed Montazeri
-- Meike Rittmeier
+print("Are Haribo Gummibears vegan? {}".format(vegan))
+````
