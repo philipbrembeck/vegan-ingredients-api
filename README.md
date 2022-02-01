@@ -60,14 +60,6 @@ The following error responses can be expected:
     "message": "Missing parameter: text-input"
   }
   ````
-* `429` - Your rate limit has exceeded. Please try again later/try another `AUTH-KEY`:
-  ````json
-  {
-    "code": "ratelimit_exceeded",
-    "status": "429",
-    "message": "Try again after 24 hours"
-  }
-  ````
 
 ## Code examples
 ### PHP
