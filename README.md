@@ -3,7 +3,7 @@
 # VeganCheck.me Ingredients API
 
 ## Introduction
-The VeganCheck.me Ingredients API is a fork of [is-vegan](https://github.com/hmontazeri/is-vegan) with some more languages for recognition added.
+The VeganCheck.me Ingredients API is a fork of [is-vegan](https://github.com/hmontazeri/is-vegan) with some more languages for recognition added and for my own convenience converted into PHP.
 
 ## How to use
 ### JSON End-Point
