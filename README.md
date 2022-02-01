@@ -1,13 +1,14 @@
 <img width="80px" src="https://raw.githubusercontent.com/JokeNetwork/vegancheck.me/main/img/hero_icon.png" align="right" alt="VeganCheck Logo">
 
 # VeganCheck.me Ingredients API
+[![Deploy to IONOS](https://images.ionos.space/deploy-now-icons/deploy-to-ionos-btn.svg)](https://ionos.space/setup?repo=https://github.com/JokeNetwork/vegan-ingredients-api)
 
 ## Introduction
 The VeganCheck.me Ingredients API is a fork of [is-vegan](https://github.com/hmontazeri/is-vegan) with some more languages for recognition added and for my own convenience converted into PHP.
 
 ## How to use
 ### JSON End-Point
-The APIs base path is `https://vegancheck.me/api/v0/ingredients` and gives out a JSON response. 
+The APIs base path is `https://ingredients.vegancheck.me` and gives out a JSON response. (Thanks to IONOS Deploy Now!) 
 
 ### Parameters
 The following parameters are available as of now:
@@ -18,7 +19,7 @@ The following parameters are available as of now:
 Sample request:
   ````bash
   curl -X GET \
-  'https://vegancheck.me/api/v0/ingredients' \
+  'https://ingredients.vegancheck.me/ingredients' \
   --header 'Content-Type: text/plain' \
   -d 'glucose syrup (from wheat or corn), sugar, gelatin, dextrose (from wheat or corn), contains less than 2% of: citric acid, atrificial flavors, natural flavors, palm oil, palm kernel oil, carnabua wax, beeswax, yellow 5, red 40, blue 1.'
   ````
@@ -66,7 +67,7 @@ The following error responses can be expected:
 ````php
 $ch = curl_init();
 
-curl_setopt($ch, CURLOPT_URL, 'https://vegancheck.me/api/v0/ingredients');
+curl_setopt($ch, CURLOPT_URL, 'https://ingredients.vegancheck.me/ingredients');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
 
@@ -92,7 +93,7 @@ $headers = array(
     'Content-Type' => 'text/plain'
 );
 $data = 'glucose syrup (from wheat or corn), sugar, gelatin, dextrose (from wheat or corn), contains less than 2% of: citric acid, atrificial flavors, natural flavors, palm oil, palm kernel oil, carnabua wax, beeswax, yellow 5, red 40, blue 1.';
-$result = Requests::get('https://vegancheck.me/api/v0/ingredients', $headers, $data);
+$result = Requests::get('https://ingredients.vegancheck.me', $headers, $data);
 $data = json_decode($result);
 $vegan = $data->data->vegan;
 
@@ -103,7 +104,7 @@ echo 'Are Haribo Gummibears vegan? '.$vegan;
 ````py
 import requests
 
-reqUrl = "https://vegancheck.me/api/v0/ingredients"
+reqUrl = "https://ingredients.vegancheck.me"
 
 headersList = {
  "Content-Type": "text/plain" 
