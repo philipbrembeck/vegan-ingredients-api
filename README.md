@@ -9,10 +9,6 @@ The VeganCheck.me Ingredients API is a fork of [is-vegan](https://github.com/hmo
 ### JSON End-Point
 The APIs base path is `https://vegancheck.me/api/v0/ingredients` and gives out a JSON response. 
 
-### Authenticate
-For this endpoint, no authentication is needed.
-Please note that there is a general rate limit of 1,000 requests/day/IP. 
-
 ### Parameters
 The following parameters are available as of now:
 | parameter | usage                               | method              |
