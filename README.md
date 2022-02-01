@@ -84,6 +84,20 @@ $vegan = $data->data->vegan;
 
 echo 'Are Haribo Gummibears vegan? '.$vegan;
 ````
+or if you want to use the brilliant library [Requests for PHP]:
+````php
+include('vendor/rmccue/requests/library/Requests.php');
+Requests::register_autoloader();
+$headers = array(
+    'Content-Type' => 'text/plain'
+);
+$data = 'glucose syrup (from wheat or corn), sugar, gelatin, dextrose (from wheat or corn), contains less than 2% of: citric acid, atrificial flavors, natural flavors, palm oil, palm kernel oil, carnabua wax, beeswax, yellow 5, red 40, blue 1.';
+$result = Requests::get('https://vegancheck.me/api/v0/ingredients', $headers, $data);
+$data = json_decode($result);
+$vegan = $data->data->vegan;
+
+echo 'Are Haribo Gummibears vegan? '.$vegan;
+````
 
 ### Python
 ````py
