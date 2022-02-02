@@ -3,6 +3,9 @@
 # VeganCheck.me Ingredients API
 [![Deploy to IONOS](https://images.ionos.space/deploy-now-icons/deploy-to-ionos-btn.svg)](https://ionos.space/setup?repo=https://github.com/JokeNetwork/vegan-ingredients-api)
 
+## Introduction
+The VeganCheck.me Ingredients API is a fork of [is-vegan](https://github.com/hmontazeri/is-vegan) with some more languages for recognition added and for my own convenience converted into PHP.
+
 ## Table of contents
 - [Introduction](#introduction)
 - [How to use](#how-to-use)
@@ -15,9 +18,6 @@
   - [PHP](#php)
   - [Python](#python)
   - [Javascript](#javascript)
-
-## Introduction
-The VeganCheck.me Ingredients API is a fork of [is-vegan](https://github.com/hmontazeri/is-vegan) with some more languages for recognition added and for my own convenience converted into PHP.
 
 ## How to use
 ### JSON End-Point
