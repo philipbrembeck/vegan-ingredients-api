@@ -3,6 +3,19 @@
 # VeganCheck.me Ingredients API
 [![Deploy to IONOS](https://images.ionos.space/deploy-now-icons/deploy-to-ionos-btn.svg)](https://ionos.space/setup?repo=https://github.com/JokeNetwork/vegan-ingredients-api)
 
+## Table of contents
+- [Introduction](#introduction)
+- [How to use](#how-to-use)
+  - [JSON End-Point](#json-end-point)
+  - [Parameters](#parameters)
+  - [Repsponses](#responses)
+    - [Positive response](#positive-response)
+    - [Error responses](#error-responses)
+- [Code examples](#code-examples)
+  - [PHP](#php)
+  - [Python](#python)
+  - [Javascript](#javascript)
+
 ## Introduction
 The VeganCheck.me Ingredients API is a fork of [is-vegan](https://github.com/hmontazeri/is-vegan) with some more languages for recognition added and for my own convenience converted into PHP.
 
@@ -91,7 +104,7 @@ $vegan = $data->data->vegan;
 
 echo 'Are Haribo Gummibears vegan? '.$vegan;
 ````
-or if you want to use the brilliant library [Requests for PHP]:
+or if you want to use the brilliant library [Requests for PHP](https://github.com/WordPress/Requests):
 ````php
 include('vendor/rmccue/requests/library/Requests.php');
 Requests::register_autoloader();
@@ -122,4 +135,28 @@ response = requests.request("GET", reqUrl, data=payload,  headers=headersList)
 vegan = response.json()['data']['vegan']
 
 print("Are Haribo Gummibears vegan? {}".format(vegan))
+````
+
+### Javascript
+````js
+<script>
+let headersList = {
+ "Content-Type": "text/plain"
+}
+
+let bodyContent = "glucose syrup (from wheat or corn), sugar, gelatin, dextrose (from wheat or corn), contains less than 2% of: citric acid, atrificial flavors, natural flavors, palm oil, palm kernel oil, carnabua wax, beeswax, yellow 5, red 40, blue 1.";
+
+fetch("https://home-5006488390.app-ionos.space/ingredients", { 
+  method: "POST",
+  body: bodyContent,
+  headers: headersList
+}).then(function(response) {
+  return response.text();
+}).then(function(data) {
+  console.log(data);
+  document.getElementById("result").innerHTML = "Are Gummibears vegan?" + obj.data.vegan;
+})
+</script>
+
+<p id="result"></p>
 ````
