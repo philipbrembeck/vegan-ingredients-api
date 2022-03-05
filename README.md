@@ -46,7 +46,7 @@ Sample request:
   ````
 The header `"text/plain"` as well as the plain-text input has to be sent with every request, otherwise an error will be thrown.
 
-**Attention**: The ingredients have to be comma and space seperated!
+**Attention**: The ingredients have to be comma and space seperated and URL-encoded if posted through the `ingredients`-parameter. Otherwise, the results will be erroneous.
 
 ### Responses
 We use standardized HTTP status codes as responses. 
@@ -104,7 +104,7 @@ curl_close($ch);
 $data = json_decode($result);
 $vegan = $data->data->vegan;
 
-echo 'Are Haribo Gummibears vegan? '.$vegan;
+echo 'Are Gummibears vegan? '.$vegan;
 ````
 or if you want to use the brilliant library [Requests for PHP](https://github.com/WordPress/Requests):
 ````php
@@ -118,7 +118,7 @@ $result = Requests::get('https://api.vegancheck.me/v0/ingredients', $headers, $d
 $data = json_decode($result);
 $vegan = $data->data->vegan;
 
-echo 'Are Haribo Gummibears vegan? '.$vegan;
+echo 'Are Gummibears vegan? '.$vegan;
 ````
 
 ### Python
@@ -136,7 +136,7 @@ payload = "glucose syrup (from wheat or corn), sugar, gelatin, dextrose (from wh
 response = requests.request("GET", reqUrl, data=payload,  headers=headersList)
 vegan = response.json()['data']['vegan']
 
-print("Are Haribo Gummibears vegan? {}".format(vegan))
+print("Are Gummibears vegan? {}".format(vegan))
 ````
 
 ### Javascript
