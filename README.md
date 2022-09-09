@@ -21,7 +21,7 @@ The VeganCheck.me Ingredients API is a fork of [is-vegan](https://github.com/hmo
 
 ## How to use
 ### JSON End-Point
-The APIs base path is `https://api.vegancheck.me/v0/ingredients` and gives out a JSON response. (Thanks to IONOS Deploy Now!) 
+The APIs base path is `https://api.vegancheck.me/v0/ingredients` and gives out a JSON response.
 
 You can find the [monitioring status page here](https://stats.uptimerobot.com/LY1gRuP5j6).
 
