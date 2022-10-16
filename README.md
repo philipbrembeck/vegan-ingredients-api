@@ -1,10 +1,11 @@
 <img width="80px" src="https://raw.githubusercontent.com/JokeNetwork/vegancheck.me/main/img/hero_icon.png" align="right" alt="VeganCheck Logo">
 
 # VeganCheck.me Ingredients API
-[![Deploy to IONOS](https://images.ionos.space/deploy-now-icons/deploy-to-ionos-btn.svg)](https://ionos.space/setup?repo=https://github.com/JokeNetwork/vegan-ingredients-api)
 
 ## Introduction
 The VeganCheck.me Ingredients API is a fork of [is-vegan](https://github.com/hmontazeri/is-vegan) with some more languages for recognition added and for my own convenience converted into PHP.
+
+Please refer to [VeganCheck.me Ingredients API Documentation](https://jokenetwork.de/vegancheck-ingredients-api) for a full and up to date documentation. 
 
 ## Table of contents
 - [Introduction](#introduction)
