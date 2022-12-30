@@ -1,5 +1,9 @@
 <?php
 $isvegan = array(
+    "E966",
+    "E910",
+    "E920",
+    "E921",
     "pork",
     "pig",
     "schwein",
