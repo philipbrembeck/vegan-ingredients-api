@@ -1,13 +1,19 @@
 <img width="80px" src="https://raw.githubusercontent.com/JokeNetwork/vegancheck.me/main/img/hero_icon.png" align="right" alt="VeganCheck Logo">
 
-# VeganCheck.me Ingredients API
+# VeganCheck.me Ingredients API (PHP)
 
+## Please note - Archived 
 This API is outdated. The VeganCheck.me Ingredients API is now written in Node.js and [available here](https://github.com/JokeNetwork/VeganCheck.me-API).
 
+## Readme
+The old README is also outdated, as the defined paths etc. don't work anymore.
+<details>
+  <summary>Open the old README</summary>
+  
 ## Introduction
 The VeganCheck.me Ingredients API is a fork of [is-vegan](https://github.com/hmontazeri/is-vegan) with some more languages for recognition added and for my own convenience converted into PHP.
 
-Please refer to [VeganCheck.me Ingredients API Documentation](https://jokenetwork.de/vegancheck-ingredients-api) for a full and up to date documentation. 
+Please refer to [VeganCheck.me Ingredients API Documentation](https://jokenetwork.de/vegancheck-ingredients-api) for a full documentation [Not up-to-date anymore!]. 
 
 ## Table of contents
 - [Introduction](#introduction)
@@ -24,9 +30,7 @@ Please refer to [VeganCheck.me Ingredients API Documentation](https://jokenetwor
 
 ## How to use
 ### JSON End-Point
-The APIs base path is `https://api.vegancheck.me/v0/ingredients` and gives out a JSON response.
-
-You can find the [monitioring status page here](https://stats.uptimerobot.com/LY1gRuP5j6).
+The APIs base path is `https://api.vegancheck.me/v0/ingredients` and gives out a JSON response [Not up-to-date anymore!].
 
 ### Parameters
 The following parameters are available as of now:
@@ -165,3 +169,4 @@ fetch("https://api.vegancheck.me/v0/ingredients", {
 
 <p id="result"></p>
 ````
+</details>
