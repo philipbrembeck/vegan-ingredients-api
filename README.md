@@ -2,6 +2,8 @@
 
 # VeganCheck.me Ingredients API
 
+This API is outdated. The VeganCheck.me Ingredients API is now written in Node.js and [available here](https://github.com/JokeNetwork/VeganCheck.me-API).
+
 ## Introduction
 The VeganCheck.me Ingredients API is a fork of [is-vegan](https://github.com/hmontazeri/is-vegan) with some more languages for recognition added and for my own convenience converted into PHP.
 
