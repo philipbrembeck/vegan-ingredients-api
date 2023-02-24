@@ -1,9 +1,9 @@
-<img width="80px" src="https://raw.githubusercontent.com/JokeNetwork/vegancheck.me/main/img/hero_icon.png" align="right" alt="VeganCheck Logo">
+<img width="80px" src="https://raw.githubusercontent.com/JokeNetwork/vegancheck.me/main/public/img/hero_icon.png" align="right" alt="VeganCheck Logo">
 
 # VeganCheck.me Ingredients API (PHP)
 
-## Please note - Archived 
-This API is outdated. The VeganCheck.me Ingredients API is now written in Node.js and [available here](https://github.com/JokeNetwork/VeganCheck.me-API).
+> **Warning** <br /> 
+> This API is outdated. The VeganCheck.me Ingredients API is now written in Node.js and [available here](https://github.com/JokeNetwork/VeganCheck.me-API).
 
 ## Readme
 The old README is also outdated, as the defined paths etc. don't work anymore.
